@@ -1,28 +1,34 @@
 package com.example.demo.entities;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name="divisions")
+@Table(name="excursions")
 @Getter
 @Setter
-public class Division {
+public class Excursion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "division_id")
+    @Column(name = "excursion_id")
     private Long id;
 
+    @Column(name = "excursion_title")
+    private String excursion_title;
 
-    @Column(name = "division")
-    private String division_name;
+    @Column(name = "excursion_price")
+    private BigDecimal excursion_price;
+
+    @Column(name = "image_url")
+    private String image_URL;
 
     @Column(name = "create_date")
     @CreationTimestamp
@@ -33,7 +39,9 @@ public class Division {
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false)
-    private Country country;
+    @JoinColumn(name = "vacation_id", nullable = false)
+    private Vacation vacation;
 
+    @ManyToMany(mappedBy = "excursions")
+    private Set<CartItem> cartitems;
 }

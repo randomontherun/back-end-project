@@ -46,6 +46,7 @@ public class Customer {
     @Column(name = "division_id")
     private Division division;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Cart> carts;
 
 }
