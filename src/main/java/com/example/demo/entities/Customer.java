@@ -43,7 +43,8 @@ public class Customer {
     @UpdateTimestamp
     private Date last_update;
 
-    @Column(name = "division_id")
+    @ManyToOne
+    @JoinColumn(name = "division_id", nullable = false)
     private Division division;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
