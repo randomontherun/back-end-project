@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import jakarta.validation.constraints.*;
 
 import java.util.Date;
 import java.util.Set;
@@ -20,19 +21,29 @@ public class Customer {
     @Column(name = "customer_id")
     private Long id;
 
-    @Column(name = "customer_first_name")
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "customer_first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "customer_last_name")
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "customer_last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "address")
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "postal_code")
+    @NotNull
+    @Pattern(regexp = "^[0-9]{5}$")
+    @Column(name = "postal_code", nullable = false)
     private String postal_code;
 
-    @Column(name = "phone")
+    @NotNull
+    @Pattern(regexp = "^[0-9]{10}$")
+    @Column(name = "phone", nullable = false)
     private String phone;
 
     @Column(name = "create_date")
