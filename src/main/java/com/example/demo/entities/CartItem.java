@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="cart-items")
+@Table(name="cart_items")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,7 +28,7 @@ public class CartItem {
     @JoinColumn(name = "vacation_id", nullable = false)
     private Vacation vacation;
 
-    @ManyToMany(cascade =  {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany
     @JoinTable( name = "excursion_cartitem",
                 joinColumns = @JoinColumn(name = "cart_item_id"),
                 inverseJoinColumns = @JoinColumn(name = "excursion_id"))
