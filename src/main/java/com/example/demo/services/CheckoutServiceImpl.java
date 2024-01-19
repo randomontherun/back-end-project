@@ -27,17 +27,18 @@ public class CheckoutServiceImpl implements CheckoutService{
     public PurchaseResponse placeOrder(Purchase purchase) {
         try {
             Cart cart = purchase.getCart();
-          //  return new PurchaseResponse("Check cart crt can not be null");
 
+            // Check if cart is null or cart items are empty
+            if (cart == null || purchase.getCartItems() == null || purchase.getCartItems().isEmpty()) {
+                throw new IllegalArgumentException("Cart cannot be empty");
+            }
 
             String orderTrackingNumber = generateOrderTrackingNumber();
             cart.setOrderTrackingNumber(orderTrackingNumber);
-    // cartItems not null and cartItems.isEmpty
+
             Set<CartItem> cartItems = purchase.getCartItems();
             cartItems.forEach(item -> item.setCart(cart));
 
-
-           // Customer customer = purchase.getCustomer();
             cart.setStatus(StatusType.ordered);
             cartRepository.save(cart);
 
