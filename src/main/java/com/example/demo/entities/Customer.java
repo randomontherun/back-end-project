@@ -16,7 +16,6 @@ import java.util.Set;
 @Table(name="customers")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Customer {
 

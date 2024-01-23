@@ -15,7 +15,6 @@ import java.util.Date;
 @Table(name="divisions")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Division {
 

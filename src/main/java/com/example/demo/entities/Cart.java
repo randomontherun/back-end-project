@@ -1,7 +1,6 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,13 +9,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="carts")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
 
@@ -51,10 +50,13 @@ public class Cart {
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
-    private Set<CartItem> cartItems;
+    private Set<CartItem> cartItems = new HashSet<>();
 
-    public void add(CartItem item) {
+    public void addCartItem(CartItem cartItem) {
+        if(cartItem.getExcursions().isEmpty())
+            throw new NullPointerException("Please select an excursion");
+        cartItems.add(cartItem);
+        cartItem.setCart(this);
     }
-
 
 }

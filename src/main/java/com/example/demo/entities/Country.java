@@ -17,7 +17,6 @@ import java.util.Set;
 @Table(name="countries")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Country {
 
